@@ -4,13 +4,13 @@
     "email": "youssef@gmail.com",
     "id": 1,
     "password": "youssef111",
-    "departmentID":"1"
-  }, 
-   {
+    "departmentID": "1"
+  },
+  {
     "name": "ahmed",
     "email": "ahmed@gmail.com",
     "id": 2,
     "password": "ahmedf111",
-    "departmentID":"1"
+    "departmentID": "1"
   }
 ]
