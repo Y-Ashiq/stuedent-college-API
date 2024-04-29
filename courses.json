@@ -1,6 +1,14 @@
-[{
- "id":1,
- "name":"introduction to  computer science",
- "content":"1-Introduction to Computer Programming  2-How Computers Work  3-mathematics for computer science",
- "departmentID": 1
-}]
+[
+  {
+    "id": 1,
+    "name": "introduction to  computer science",
+    "content": "1-Introduction to Computer Programming  2-How Computers Work  3-mathematics for computer science",
+    "departmentID": 1
+  },
+  {
+    "id": 3,
+    "name": "introduction to  information technology",
+    "content": "1-Introduction to Computer Programming  2-How Computers Work  3-mathematics for computer science",
+    "departmentID": 3
+  }
+]

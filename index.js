@@ -1,55 +1,76 @@
 const http = require("http");
-const fs = require("fs");
-const url = require("url");
-
-
-
-const students = JSON.parse(fs.readFileSync("./student.json", "utf-8"));
-const courses = fs.readFileSync("./courses.json", "utf-8");
-const department = fs.readFileSync("./department.json", "utf-8");
-
-// const student = students.find((el) => {
-  
-  
-//   console.log(student);
-
-// });
+const courses = require("./courses");
+const students = require("./students");
+const departments = require("./departments")
 
 
 
 const server = http.createServer((req, res) => {
-  res.writeHead(200, {
-    'Content-Type': 'application/json'
-  });
+    res.writeHead(200, {
+        'Content-Type': 'application/json'
+    });
 
+    switch (req.url) {
+        case "/students":
+            if (req.method === "GET") {
+                students.getStudents(res);
+            } else if (req.method === "POST") {
+                students.postStudent(req, res);
+            } else if (req.method === "DELETE") {
+                students.deleteStudent(req, res);
+            } else if (req.method === "PUT") {
+                students.putStudent(req, res);
+            }
+            break;
+        case "/students/all-students":
+            if (req.method === "GET") {
+                students.getAllStudents(res);
+            }
+            break;
+        case "/student":
+            if (req.method === "GET") {
+                students.getStudent(req, res);
+            }
+            break;
+        case "/courses":
+            if (req.method === "POST") {
+                courses.postCourse(req, res);
+            } else if (req.method === "PUT") {
+                courses.putCourse(req, res);
+            } else if (req.method === "DELETE") {
 
+                courses.deleteCourse(req, res);
+            } else if (req.method === "GET") {
+                courses.getAllCourses(res);
+            }
+            break;
+        case "/course":
+            if (req.method === "GET") {
+                courses.getCourse(req, res);
+            }
+            break;
+        case "/departments":
+            if (req.method === "POST") {
+                departments.postDepartment(req, res);
+            } else if (req.method === "PUT") {
+                departments.putDepartment(req, res);
+            } else if (req.method === "DELETE") {
+                departments.deleteDepartment(req, res);
 
-
-  if (req.url == "/students" && req.method == "GET") {
-
-    res.end(JSON.stringify(students));
-
-  } else if (req.url == "/students" && req.method == "POST") {
-
-    req.on("data", chunk => {
-
-
-      students.push(JSON.parse(chunk));
-      console.log(students.includes(JSON.parse(chunk).name));
-      fs.writeFileSync("./student.json", JSON.stringify(students));
-
-
-
-    })
-    res.end("user added");
-
-
-  }
-
-
-
+            } else if (req.method === "GET") {
+                departments.getAlldepartments(res);
+            }
+            break;
+        case "/department":
+            if (req.method === "GET") {
+                departments.getDeparment(req, res);
+            }
+            break;
+        default:
+            res.end("Invalid endpoint");
+    }
 });
 
-server.listen(3000, '127.0.0.1', () => {
-  console.log('Listening on 127.0.0.1:3000');
+server.listen(3000, () => {
+    console.log('Server is running on port 3000');
 });
